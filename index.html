@@ -1,103 +1,117 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>シンシャ - ShinSha</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #000;
-      overflow: hidden;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shinsha.jp</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      width: 90%;
-      max-width: 400px;
-    }
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000011;
+            z-index: -1;
+        }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
-    
-    footer {
-      position: fixed;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      padding: 10px 0;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-    }
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
 
-    @keyframes stars {
-      from {
-        transform: translateY(0);
-      }
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
 
-      to {
-        transform: translateY(-2000px);
-      }
-    }
+        p {
+            font-size: 1.2em;
+        }
 
-    .stars {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      background: transparent;
-      box-shadow: 500px 500px #FFF, 700px 800px #FFF, 900px 1000px #FFF, 1100px 1200px #FFF, 1300px 1400px #FFF;
-      animation: stars 50s linear infinite;
-    }
-
-    .stars2 {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: transparent;
-      box-shadow: 600px 600px #FFF, 800px 900px #FFF, 1000px 1100px #FFF, 1200px 1300px #FFF, 1400px 1500px #FFF;
-      animation: stars 100s linear infinite;
-    }
-
-    .stars3 {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: transparent;
-      box-shadow: 700px 700px #FFF, 900px 1000px #FFF, 1100px 1200px #FFF, 1300px 1400px #FFF, 1500px 1600px #FFF;
-      animation: stars 150s linear infinite;
-    }
-  </style>
+        .footer {
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="stars"></div>
-  <div class="stars2"></div>
-  <div class="stars3"></div>
-  <div class="container">
-    <h1>シンシャ</h1>
-    <p>公開未定</p>
-  </div>
-  <footer>
-    <span>info@shinsha.jp</span>
-  </footer>
+    <div class="space-background" id="space"></div>
+    <div class="content">
+        <h1>シンシャ</h1>
+        <p>公開未定</p>
+    </div>
+    <div class="footer">
+        info@shinsha.jp
+    </div>
+
+    <script>
+        function createStars() {
+            const space = document.getElementById('space');
+            const starCount = 200;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                resetStar(star);
+                space.appendChild(star);
+                animateStar(star);
+            }
+        }
+
+        function resetStar(star) {
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.opacity = Math.random();
+        }
+
+        function animateStar(star) {
+            const duration = (Math.random() * 40 + 40) * 800; // 32-64 seconds
+            const keyframes = [
+                { transform: 'translate(0, 0)', opacity: star.style.opacity },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`, opacity: Math.random() }
+            ];
+
+            star.animate(keyframes, {
+                duration: duration,
+                iterations: Infinity,
+                direction: 'alternate',
+                easing: 'linear'
+            });
+        }
+
+        createStars();
+    </script>
 </body>
 
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アオイア - AOIA.jp</title>
+    <title>アオイア - AOIA</title>
     <style>
         body,
         html {
@@ -50,6 +50,36 @@
 
         p {
             font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .about-us {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .about-us-box {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            color: white;
+            text-align: left;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
         }
 
         .footer {
@@ -68,6 +98,18 @@
     <div class="content">
         <h1>アオイア</h1>
         <p>公開未定</p>
+        <p class="about-us" onclick="toggleAboutUs()">概要</p>
+    </div>
+    <div class="about-us-box" id="aboutUsBox">
+        <span class="close-button" onclick="toggleAboutUs()">×</span>
+        <h2>概要</h2>
+        <p>AOIAプロジェクトは、以下の方法で写真業界に革命をもたらすことを目指しています：</p>
+        <ol>
+            <li>写真家、モデル、コミュニティ間のつながりを促進する</li>
+            <li>ワークフローを効率化し、一般的な問題点や摩擦を軽減する</li>
+            <li>参加者全員にとって安全で楽しい環境を創出する</li>
+        </ol>
+        <p>私たちの使命は、関係者全員の幸福を優先しながら、写真における協力と創造性を高めることです。</p>
     </div>
     <div class="footer">
         info@aoia.jp
@@ -108,6 +150,11 @@
                 direction: 'alternate',
                 easing: 'linear'
             });
+        }
+
+        function toggleAboutUs() {
+            const aboutUsBox = document.getElementById('aboutUsBox');
+            aboutUsBox.style.display = aboutUsBox.style.display === 'none' ? 'block' : 'none';
         }
 
         createStars();

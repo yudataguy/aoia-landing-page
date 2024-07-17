@@ -154,7 +154,11 @@
 
         function toggleAboutUs() {
             const aboutUsBox = document.getElementById('aboutUsBox');
-            aboutUsBox.style.display = aboutUsBox.style.display === 'none' ? 'block' : 'none';
+            if (aboutUsBox.style.display === 'none' || aboutUsBox.style.display === '') {
+                aboutUsBox.style.display = 'block';
+            } else {
+                aboutUsBox.style.display = 'none';
+            }
         }
 
         createStars();
